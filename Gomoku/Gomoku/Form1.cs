@@ -12,15 +12,30 @@ namespace Gomoku
 {
     public partial class Form1 : Form
     {
+        //用於強制黑白交替
+       private bool isblack = true;
+
         public Form1()
         {
             InitializeComponent();
-            this.Controls.Add(new BlackPiece(125, 125));
-            this.Controls.Add(new WhitePiece(200, 200));
+            //this.Controls.Add(new BlackPiece(125, 125));
+            //this.Controls.Add(new WhitePiece(200, 200));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        // MouseEventArgs 紀錄滑鼠按下時的資訊
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
+            if (isblack)
+            {
+                this.Controls.Add(new BlackPiece(e.X, e.Y));
+                isblack = false;
+            }
+            else
+            {
+                this.Controls.Add(new WhitePiece(e.X, e.Y));
+                isblack = true;
+            }
+            
         }
     }
 }

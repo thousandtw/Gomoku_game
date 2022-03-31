@@ -39,7 +39,7 @@ namespace Gomoku
             this.ClientSize = new System.Drawing.Size(796, 699);
             this.Name = "Form1";
             this.Text = "五子棋";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.ResumeLayout(false);
 
         }
