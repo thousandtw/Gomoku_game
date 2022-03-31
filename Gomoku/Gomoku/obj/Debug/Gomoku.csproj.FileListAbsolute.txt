@@ -1,0 +1,10 @@
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\bin\Debug\Gomoku.exe.config
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\bin\Debug\Gomoku.exe
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\bin\Debug\Gomoku.pdb
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.AssemblyReference.cache
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.Form1.resources
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.Properties.Resources.resources
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.GenerateResource.cache
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.CoreCompileInputs.cache
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.exe
+D:\ASP.NET\Gomoku_game\Gomoku\Gomoku\obj\Debug\Gomoku.pdb
