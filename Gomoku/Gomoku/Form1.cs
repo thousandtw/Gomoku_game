@@ -24,10 +24,21 @@ namespace Gomoku
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             Piece piece = game.PlaceAPiece(e.X, e.Y);
+
             //判斷點上有無棋子
             if (piece != null)
             {
                 this.Controls.Add(piece);
+
+                //檢查是否有人獲勝,並給予獲勝提示
+                if (game.Winner == PieceType.Black)
+                {
+                    MessageBox.Show("Black Wins !");
+                }
+               else if (game.Winner == PieceType.White)
+                {
+                    MessageBox.Show("White Wins !");
+                }
             }
         }
 

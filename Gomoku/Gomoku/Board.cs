@@ -11,7 +11,7 @@ namespace Gomoku
     class Board
     {
         //棋盤單方向最大格數 
-        private static readonly int NODE_COUNT = 9;
+        public static readonly int NODE_COUNT = 9;
         //宣告一個沒有在棋盤上的點
         private static readonly Point NO_MATCH_NODE = new Point(-1, -1);
         //棋盤邊距
@@ -22,6 +22,13 @@ namespace Gomoku
         private static readonly int NODE_DISTRANCE = 75;
         //棋子的資料結構
         private Piece[,] pieces = new Piece[NODE_COUNT, NODE_COUNT];
+        
+        //判斷最後下棋
+        private Point lastPlacenode = NO_MATCH_NODE;
+        public Point LastPlacenode
+        {
+            get { return lastPlacenode ;} 
+        }
 
         //判斷已在點上的棋子顏色
         public PieceType GetPieceType(int nodeldX, int nodeldY)
@@ -76,7 +83,6 @@ namespace Gomoku
             }
 
             //根據TYPE產生對應的棋子
-
             Point formPos = convertToPosition(nodeld);//換成精準的視窗位置
             if (type == PieceType.Black)
             {
@@ -86,6 +92,9 @@ namespace Gomoku
             {
                 pieces[nodeld.X, nodeld.Y] = new WhitePiece(formPos.X, formPos.Y);
             }
+
+            //紀錄最後下棋的位置
+             lastPlacenode = nodeld;
 
             //回傳棋子位置
             return pieces[nodeld.X, nodeld.Y];
