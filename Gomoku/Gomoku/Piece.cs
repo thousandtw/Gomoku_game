@@ -8,7 +8,8 @@ using System.Drawing;
 
 namespace Gomoku
 {
-   abstract class Piece : PictureBox
+    //棋子類別
+    abstract class Piece : PictureBox
     {
         //指定邊長常數(更改圖片大小不用更改下方值) (static readonly確保為常數)
         private static readonly int IMAGE_WIDTH =50;

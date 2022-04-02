@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Gomoku
 {
+    //棋盤類別
     class Board
     {
         //宣告一個沒有在棋盤上的點
@@ -17,7 +18,8 @@ namespace Gomoku
         private static readonly int NODE_RADIUS = 10;
         //點與點的距離
         private static readonly int NODE_DISTRANCE = 75;
-
+        //棋子的資料結構
+        private Piece[,] pieces = new Piece[9,9];
 
         //軸心程式
         public bool CanBePlaced(int x,int y)
@@ -31,8 +33,46 @@ namespace Gomoku
                 return false;
             }
 
-            //TODO: 如果有的話,回傳flase
+            //檢查棋子是否存在點上,有則回傳false
+            if (pieces[nodeld.X, nodeld.Y] != null)
+            {
+                return false;
+            }
+
             return true;
+        }
+
+        //使棋子按照點放置,並檢查
+        public Piece PlaceAPiece(int x,int y,PieceType type)
+        {
+            //找出最近的節點 (NODE)
+            Point nodeld = FindTheCloseNode(x, y);
+
+            //如果沒有的話,回傳 false
+            if (nodeld == NO_MATCH_NODE)
+            {
+                return null;
+            }
+
+            //檢查棋子是否存在點上,有則回傳null
+            if (pieces[nodeld.X, nodeld.Y] != null)
+            {
+                return null;
+            }
+
+            //TODO:根據TYPE產生對應的棋子
+            if (type == PieceType.Black)
+            {
+                pieces[nodeld.X, nodeld.Y] = new BlackPiece(x, y);
+            }
+            else if (type == PieceType.White)
+            {
+                pieces[nodeld.X, nodeld.Y] = new WhitePiece(x, y);
+            }
+
+            //回傳棋子位置
+            return pieces[nodeld.X, nodeld.Y];
+
         }
 
         //二維判斷方法

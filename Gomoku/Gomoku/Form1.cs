@@ -30,13 +30,31 @@ namespace Gomoku
         {
             if (isblack)
             {
-                this.Controls.Add(new BlackPiece(e.X, e.Y));
-                isblack = false;
+                Piece piece = board.PlaceAPiece(e.X, e.Y,PieceType.Black);
+
+                //判斷點上有無棋子
+                if (piece != null)
+                {
+                    this.Controls.Add(piece);
+                    isblack = false;
+                }
+
+                //this.Controls.Add(new BlackPiece(e.X, e.Y));
+                //isblack = false;
             }
             else
             {
-                this.Controls.Add(new WhitePiece(e.X, e.Y));
-                isblack = true;
+                Piece piece = board.PlaceAPiece(e.X, e.Y, PieceType.White);
+
+                //判斷點上有無棋子
+                if (piece != null)
+                {
+                    this.Controls.Add(piece);
+                    isblack = true;
+                }
+
+                //this.Controls.Add(new WhitePiece(e.X, e.Y));
+                //isblack = true;
             }
           
         }

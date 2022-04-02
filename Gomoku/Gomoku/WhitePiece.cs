@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gomoku
 {
+    //白棋子類別
     class WhitePiece :Piece
     {
         //繼承於基底類別,所以必須以WhitePiece建構子將(x,y)傳回-基底類別的Piece建構子
