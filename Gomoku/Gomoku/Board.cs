@@ -13,7 +13,7 @@ namespace Gomoku
         //宣告一個沒有在棋盤上的點
         private static readonly Point NO_MATCH_NODE = new Point(-1, -1);
         //棋盤邊距
-        private static readonly int OPPSET = 75;
+        private static readonly int OFFSET = 75;
         //點能感應距離(半徑)
         private static readonly int NODE_RADIUS = 10;
         //點與點的距離
@@ -21,11 +21,11 @@ namespace Gomoku
         //棋子的資料結構
         private Piece[,] pieces = new Piece[9,9];
 
-        //軸心程式
+      
         public bool CanBePlaced(int x,int y)
         {
             //找出最近的節點 (NODE)
-            Point nodeld = FindTheCloseNode(x, y);
+            Point nodeld = findTheCloseNode(x, y);
 
             //如果沒有的話,回傳 false
             if(nodeld== NO_MATCH_NODE)
@@ -46,9 +46,9 @@ namespace Gomoku
         public Piece PlaceAPiece(int x,int y,PieceType type)
         {
             //找出最近的節點 (NODE)
-            Point nodeld = FindTheCloseNode(x, y);
+            Point nodeld = findTheCloseNode(x, y);
 
-            //如果沒有的話,回傳 false
+            //如果沒有的話,回傳 null
             if (nodeld == NO_MATCH_NODE)
             {
                 return null;
@@ -60,14 +60,16 @@ namespace Gomoku
                 return null;
             }
 
-            //TODO:根據TYPE產生對應的棋子
+            //根據TYPE產生對應的棋子
+
+            Point formPos = convertToPosition(nodeld);//換成精準的視窗位置
             if (type == PieceType.Black)
             {
-                pieces[nodeld.X, nodeld.Y] = new BlackPiece(x, y);
+                pieces[nodeld.X, nodeld.Y] = new BlackPiece(formPos.X, formPos.Y);
             }
             else if (type == PieceType.White)
             {
-                pieces[nodeld.X, nodeld.Y] = new WhitePiece(x, y);
+                pieces[nodeld.X, nodeld.Y] = new WhitePiece(formPos.X, formPos.Y);
             }
 
             //回傳棋子位置
@@ -75,18 +77,27 @@ namespace Gomoku
 
         }
 
+        //將回傳的棋盤位置轉換成精準的視窗位置
+        private Point convertToPosition(Point nodeId)
+        {
+            Point formPosition = new Point();
+            formPosition.X = nodeId.X * NODE_DISTRANCE + OFFSET;
+            formPosition.Y = nodeId.Y * NODE_DISTRANCE + OFFSET;
+            return formPosition;
+        }
+
         //二維判斷方法
-        private Point FindTheCloseNode(int x,int y)
+        private Point findTheCloseNode(int x,int y)
         {
             //判斷X靠近哪個點,有則存入位置,無則回傳不存在的點
-            int nodeldX = FindTheCloseNode(x);
+            int nodeldX = findTheCloseNode(x);
             if (nodeldX == -1)
             {
                 return NO_MATCH_NODE;
             }
 
             //判斷Y靠近哪個點,有則存入位置,無則回傳不存在的點
-            int nodeldY = FindTheCloseNode(y);
+            int nodeldY = findTheCloseNode(y);
             if (nodeldY == -1)
             {
                 return NO_MATCH_NODE;
@@ -97,16 +108,16 @@ namespace Gomoku
         }
 
         //一維判斷方法 // (pos為點到棋盤邊的距離)
-        private int FindTheCloseNode(int pos) 
+        private int findTheCloseNode(int pos) 
         {
             //判斷如果游標下棋位置在棋盤線外,則回傳負值
-            if (pos < OPPSET - NODE_RADIUS)
+            if (pos < OFFSET - NODE_RADIUS)
             {
                 return -1;
             }
 
             //扣除棋盤邊距
-            pos -= OPPSET;
+            pos -= OFFSET;
 
             //取出商數 (可得知為第幾個點)
             int quotite = pos / NODE_DISTRANCE;

@@ -22,8 +22,6 @@ namespace Gomoku
         public Form1()
         {
             InitializeComponent();
-            //this.Controls.Add(new BlackPiece(125, 125));
-            //this.Controls.Add(new WhitePiece(200, 200));
         }
 
         // MouseEventArgs 紀錄滑鼠按下時的資訊
@@ -50,7 +48,6 @@ namespace Gomoku
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-
             //判斷游標是否在能感應區域,即為能放棋子處
             if (board.CanBePlaced(e.X, e.Y))
             {
