@@ -10,6 +10,8 @@ namespace Gomoku
     //棋盤類別
     class Board
     {
+        //棋盤單方向最大格數 
+        private static readonly int NODE_COUNT = 9;
         //宣告一個沒有在棋盤上的點
         private static readonly Point NO_MATCH_NODE = new Point(-1, -1);
         //棋盤邊距
@@ -19,16 +21,16 @@ namespace Gomoku
         //點與點的距離
         private static readonly int NODE_DISTRANCE = 75;
         //棋子的資料結構
-        private Piece[,] pieces = new Piece[9,9];
+        private Piece[,] pieces = new Piece[NODE_COUNT, NODE_COUNT];
 
-      
-        public bool CanBePlaced(int x,int y)
+        //使棋子按照點放置,並檢查
+        public bool CanBePlaced(int x, int y)
         {
             //找出最近的節點 (NODE)
             Point nodeld = findTheCloseNode(x, y);
 
             //如果沒有的話,回傳 false
-            if(nodeld== NO_MATCH_NODE)
+            if (nodeld == NO_MATCH_NODE)
             {
                 return false;
             }
@@ -42,8 +44,8 @@ namespace Gomoku
             return true;
         }
 
-        //使棋子按照點放置,並檢查
-        public Piece PlaceAPiece(int x,int y,PieceType type)
+        //檢查點後,放黑或白棋
+        public Piece PlaceAPiece(int x, int y, PieceType type)
         {
             //找出最近的節點 (NODE)
             Point nodeld = findTheCloseNode(x, y);
@@ -87,18 +89,18 @@ namespace Gomoku
         }
 
         //二維判斷方法
-        private Point findTheCloseNode(int x,int y)
+        private Point findTheCloseNode(int x, int y)
         {
             //判斷X靠近哪個點,有則存入位置,無則回傳不存在的點
             int nodeldX = findTheCloseNode(x);
-            if (nodeldX == -1)
+            if (nodeldX == -1 || nodeldX >= NODE_COUNT) //需求0~8(第一個為0)
             {
                 return NO_MATCH_NODE;
             }
 
             //判斷Y靠近哪個點,有則存入位置,無則回傳不存在的點
             int nodeldY = findTheCloseNode(y);
-            if (nodeldY == -1)
+            if (nodeldY == -1 || nodeldY >= NODE_COUNT) //需求0~8(第一個為0)
             {
                 return NO_MATCH_NODE;
             }
@@ -108,7 +110,7 @@ namespace Gomoku
         }
 
         //一維判斷方法 // (pos為點到棋盤邊的距離)
-        private int findTheCloseNode(int pos) 
+        private int findTheCloseNode(int pos)
         {
             //判斷如果游標下棋位置在棋盤線外,則回傳負值
             if (pos < OFFSET - NODE_RADIUS)
@@ -126,12 +128,12 @@ namespace Gomoku
             int remainder = pos % NODE_DISTRANCE;
 
             //判斷與哪個點相近
-            
-            if(remainder <= NODE_RADIUS) //如果能被感應,回傳點位置
+
+            if (remainder <= NODE_RADIUS) //如果能被感應,回傳點位置
             {
                 return quotite;
             }
-            else if(remainder>= NODE_DISTRANCE - NODE_RADIUS) //或是靠近另一個點
+            else if (remainder >= NODE_DISTRANCE - NODE_RADIUS) //或是靠近另一個點
             {
                 return quotite + 1;
             }
@@ -139,7 +141,6 @@ namespace Gomoku
             {
                 return -1;
             }
-
         }
     }
 }
