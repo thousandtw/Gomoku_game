@@ -15,5 +15,11 @@ namespace Gomoku
         {
             this.Image = Properties.Resources.white;
         }
+
+        //繼承於基底類別,實作abstract類的行為
+        public override PieceType GetPieceType()
+        {
+            return PieceType.White;
+        }
     }
 }

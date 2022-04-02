@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gomoku
 {
-    //遊戲邏輯程式碼 (規矩)
+    //負責遊戲邏輯程式碼 (規矩)
     class GameMaster
     {
         //宣告自行建立的棋盤變數
@@ -36,11 +36,15 @@ namespace Gomoku
                 {
                     currentPlayer = PieceType.Black;
                 }
-
                 return piece;
             }
-
             return null;
+        }
+
+        //判斷遊戲贏家
+        private void CheckVinner()
+        {
+
         }
     }
 }

@@ -23,6 +23,19 @@ namespace Gomoku
         //棋子的資料結構
         private Piece[,] pieces = new Piece[NODE_COUNT, NODE_COUNT];
 
+        //判斷已在點上的棋子顏色
+        public PieceType GetPieceType(int nodeldX, int nodeldY)
+        {
+            if(pieces[nodeldX, nodeldY] == null)
+            {
+                return PieceType.None;
+            }
+            else
+            {
+                return pieces[nodeldX, nodeldY].GetPieceType();
+            }
+        }
+
         //使棋子按照點放置,並檢查
         public bool CanBePlaced(int x, int y)
         {

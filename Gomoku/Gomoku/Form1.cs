@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Gomoku
 {
+    //負責使用者互動
     public partial class Form1 : Form
     {
         private GameMaster game = new GameMaster();

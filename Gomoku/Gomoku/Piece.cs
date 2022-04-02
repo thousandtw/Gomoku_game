@@ -22,5 +22,8 @@ namespace Gomoku
             this.Location = new Point(x-IMAGE_WIDTH/2, y-IMAGE_WIDTH / 2);
             this.Size = new Size (IMAGE_WIDTH, IMAGE_WIDTH);
         }
+
+        //定義行為讓子類實作(多型概念)
+        public abstract PieceType GetPieceType();
     }
 }

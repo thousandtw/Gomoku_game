@@ -9,6 +9,6 @@ namespace Gomoku
     //規範棋子顏色
     enum PieceType
     {
-        Black,White
+        Black,White,None
     }
 }
