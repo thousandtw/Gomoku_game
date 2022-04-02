@@ -16,7 +16,8 @@ namespace Gomoku
         private Board board = new Board();
 
         //用於強制黑白交替
-       private bool isblack = true;
+        private PieceType nextPieceType = PieceType.Black;
+
 
         public Form1()
         {
@@ -28,35 +29,23 @@ namespace Gomoku
         // MouseEventArgs 紀錄滑鼠按下時的資訊
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (isblack)
+            Piece piece = board.PlaceAPiece(e.X, e.Y, nextPieceType);
+
+            //判斷點上有無棋子
+            if (piece != null)
             {
-                Piece piece = board.PlaceAPiece(e.X, e.Y,PieceType.Black);
+                this.Controls.Add(piece);
 
-                //判斷點上有無棋子
-                if (piece != null)
+                //如果為白棋,下個棋則黑(反之)
+                if (nextPieceType == PieceType.Black)
                 {
-                    this.Controls.Add(piece);
-                    isblack = false;
+                    nextPieceType = PieceType.White;
                 }
-
-                //this.Controls.Add(new BlackPiece(e.X, e.Y));
-                //isblack = false;
-            }
-            else
-            {
-                Piece piece = board.PlaceAPiece(e.X, e.Y, PieceType.White);
-
-                //判斷點上有無棋子
-                if (piece != null)
+                else if (nextPieceType == PieceType.White)
                 {
-                    this.Controls.Add(piece);
-                    isblack = true;
+                    nextPieceType = PieceType.Black;
                 }
-
-                //this.Controls.Add(new WhitePiece(e.X, e.Y));
-                //isblack = true;
             }
-          
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
